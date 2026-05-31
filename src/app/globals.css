@@ -2,32 +2,97 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ─── Light Mode (default) ─── */
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  /* Backgrounds */
+  --bg-1: #E8E3DA;
+  --bg-2: #F0EBE3;
+  --bg-3: #F8F5F0;
+
+  /* Text */
+  --text-1: #0F0D0A;
+  --text-2: rgba(15, 13, 10, 0.85);
+  --text-3: rgba(15, 13, 10, 0.65);
+
+  /* Borders */
+  --border: rgba(15, 13, 10, 0.08);
+  --border-strong: rgba(15, 13, 10, 0.16);
+
+  /* Accent */
+  --acid: #496B00;
+  --acid-text: #F8F5F0;
+  --acid-muted: rgba(73, 107, 0, 0.08);
+  --acid-border: rgba(73, 107, 0, 0.35);
+
+  /* Shadows — light mode */
+  --shadow-card: 0 1px 3px rgba(15,13,10,0.10), 0 8px 24px rgba(15,13,10,0.06);
+  --shadow-card-hover: 0 2px 6px rgba(15,13,10,0.12), 0 16px 40px rgba(15,13,10,0.09);
+  --shadow-glow: none; /* Glow is dark-mode only */
+  --shadow-glow-strong: none;
+  --shadow-nav: 0 1px 0 rgba(15, 13, 10, 0.08), 0 4px 16px rgba(15, 13, 10, 0.06);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+/* ─── Dark Mode ─── */
+.dark {
+  /* Backgrounds */
+  --bg-1: #080808;
+  --bg-2: #121212;
+  --bg-3: #1C1C1C;
+
+  /* Text */
+  --text-1: #E8E2D9;
+  --text-2: rgba(232, 226, 217, 0.75);
+  --text-3: rgba(232, 226, 217, 0.50);
+
+  /* Borders */
+  --border: rgba(232, 226, 217, 0.07);
+  --border-strong: rgba(232, 226, 217, 0.14);
+
+  /* Accent */
+  --acid: #EBFF38;
+  --acid-text: #080808;
+  --acid-muted: rgba(235, 255, 56, 0.07);
+  --acid-border: rgba(235, 255, 56, 0.22);
+
+  /* Shadows — dark mode */
+  --shadow-card: 0 1px 2px rgba(0,0,0,0.60), 0 8px 32px rgba(0,0,0,0.40);
+  --shadow-card-hover: 0 2px 4px rgba(0,0,0,0.70), 0 16px 48px rgba(0,0,0,0.50);
+  --shadow-glow: 0 0 0 1px rgba(235,255,56,0.12), 0 8px 32px rgba(235,255,56,0.10);
+  --shadow-glow-strong: 0 0 0 1px rgba(235,255,56,0.20), 0 12px 48px rgba(235,255,56,0.18);
+  --shadow-nav: 0 1px 0 rgba(232, 226, 217, 0.06), 0 4px 24px rgba(0, 0, 0, 0.60);
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background-color: var(--bg-1);
+  color: var(--text-2);
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+html {
+  scroll-behavior: smooth;
+}
+
+/* ─── Utilities ─── */
+.text-outline {
+  -webkit-text-stroke: 1.5px var(--border-strong);
+  color: transparent;
+}
+
+.hero-glow::before {
+  content: '';
+  position: absolute;
+  top: -20%;
+  left: -10%;
+  width: 60%;
+  height: 80%;
+  background: radial-gradient(ellipse at center, rgba(235,255,56,0.04) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
   }
 }
