@@ -11,11 +11,11 @@ import { ContactForm } from '@/components/sections/ContactForm'
 import { Footer } from '@/components/layout/Footer'
 import { client, urlFor } from '@/sanity/client'
 
-export const revalidate = 10; // Revalidate every 10 seconds
+export const dynamic = 'force-dynamic'; // Server-Side Rendering
 
 export default async function Home() {
   const query = `*[_type == "landingPage"][0]`
-  const landingPageData = await client.fetch(query, {}, { next: { revalidate: 10 } })
+  const landingPageData = await client.fetch(query, {}, { cache: 'no-store' })
 
   // Resolve strings for the Hero component
   const heroTitle = landingPageData?.heroTitle || null;
